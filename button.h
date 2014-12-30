@@ -5,14 +5,22 @@
 #include <iostream>
 #include <string.h>
 
-class Button : public sf::Sprite{
+class Button{
 
 public:
+
     Button();
 
-    void setSize();
+    void setSize(float x, float y);
+    void setSize(sf::Vector2f size);
 
     bool isClicked();
+
+    void setPosition(float x, float y);
+    void setPosition(sf::Vector2f position);
+    /*
+     * Return true if the button has been clicked,
+    */
     bool hasBeenClicked();
 
     float timeSinceLastClick();
@@ -23,13 +31,23 @@ public:
     void enableClickEffect();
     void disableClickEffect();
 
-    void draw(sf::RenderWindow w);
+    void setTexture(std::string name);
+    void setPressedTexture(std::string name);
+
+    void draw(sf::RenderWindow &w);
+
+    void handleEvent(sf::Event e);
 
 private:
+
     bool clicked;
     bool is_clicked;
+
+    sf::Text text;
+    sf::Sprite sprite;
+    sf::Texture texture;
+    sf::Texture pressed_texture;
     float time_since_last_click;
-    std::string text;
 
 };
 
