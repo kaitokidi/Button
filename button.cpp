@@ -54,6 +54,7 @@ float Button::timeSinceLastClick(){ return clock.getElapsedTime().asSeconds(); }
 
 void Button::setText(std::string s = "Click"){ text.setString(s); }
 
+//TODO fix it, is broken
 void Button::setTextResize(std::string s = "Click"){
     text.setString(s);
     float charSize = text.getCharacterSize();
