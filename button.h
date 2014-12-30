@@ -16,6 +16,9 @@ public:
     void setSize(float x, float y);
     void setSize(sf::Vector2f size);
 
+    /* Return the size of the button*/
+    sf::Vector2f getSize();
+
     /* The return indicates if the button is
     clicked or not*/
     bool isClicked();
@@ -23,7 +26,7 @@ public:
     /* Set the position of the button */
     void setPosition(float x, float y);
     void setPosition(sf::Vector2f position);
-    
+
     /* Return the position of the button*/
     sf::Vector2f getPosition();
 
@@ -36,17 +39,28 @@ public:
 
     /* Set the text on the button */
     void setText(std::string s);
+
+    /* Returns the string setted on the text*/
+    std::string getText();
     
     /* Set the text on the button and scale the button 
     so the text fits on it */
     void setTextResize(std::string s);
 
-    //TODO this
+    /* Enable the change of texture when the button is clicked */
     void enableClickEffect();
+
+    /* Disable the change of texture when the button is clicked */
     void disableClickEffect();
 
-    /*Set the size of the characters of the button text*/
+    /* Returns wether ClickEffect is activated or not */
+    bool clickEffectActivated();
+
+    /* Set the size of the characters of the button text*/
     void setCharacterSize(uint u);
+
+    /* Returns the characterSize*/
+    uint getCharacterSize();
 
     /*Set the color of the button's text*/
     void setColor(sf::Color c);

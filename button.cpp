@@ -19,9 +19,11 @@ Button::Button(){
     setPosition(0,0);
 }
 
-void Button::setColor(sf::Color c){text.setColor(c); }
+void Button::setTextColor(sf::Color c){text.setColor(c); }
+sf::Color Button::getTextColor(){ return text.getColor(); }
 
 void Button::setCharacterSize(uint u){ text.setCharacterSize(u); }
+uint Button::getCharacterSize(){ return text.getCharacterSize(); }
 
 void Button::setFont(sf::Font f){ font = f; text.setFont(font); }
 
@@ -43,6 +45,9 @@ void Button::setSize(sf::Vector2f size){
     sprite.setScale(size.x/sprite.getGlobalBounds().width, size.y/sprite.getGlobalBounds().height);
     //TODO set text size
 }
+sf::Vector2f Button::getSize(){
+    return sf::Vector2f(sprite.getGlobalBounds().width,sprite.getGlobalBounds().height);
+}
 
 void Button::setSize(float x, float y){ setSize(sf::Vector2f(x,y)); }
 
@@ -57,6 +62,8 @@ bool Button::hasBeenClicked(){
 float Button::timeSinceLastClick(){ return clock.getElapsedTime().asSeconds(); }
 
 void Button::setText(std::string s = "Click"){ text.setString(s); }
+
+std::string Button::getText(){ return text.getString();}
 
 //TODO fix it, is broken
 void Button::setTextResize(std::string s = "Click"){
@@ -82,6 +89,7 @@ void Button::setPressedTexture(std::string name){
 
 void Button::enableClickEffect(){ clickEffect = true; }
 void Button::disableClickEffect(){ clickEffect = false; }
+bool Button::clickEffectActivated(){ return clickEffect; }
 
 void Button::handleEvent(sf::Event e){
     if(e.type == sf::Event::MouseButtonPressed){
