@@ -24,6 +24,9 @@ public:
     void setPosition(float x, float y);
     void setPosition(sf::Vector2f position);
     
+    /* Return the position of the button*/
+    sf::Vector2f getPosition();
+
     /* Return true if the button has been clicked */
     bool hasBeenClicked();
 

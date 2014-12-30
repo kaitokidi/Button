@@ -29,10 +29,14 @@ void Button::setFont(sf::Font f){ font = f; text.setFont(font); }
 void Button::setPosition(sf::Vector2f position){
     sprite.setPosition(position);
     //TODO set text on the center of sprite
-    text.setPosition(position);
+//    text.setPosition(position.x, position.y + sprite.getGlobalBounds().height/2);
 }
 void Button::setPosition(float x, float y){
     setPosition(sf::Vector2f(x, y));
+}
+
+sf::Vector2f Button::getPosition(){
+    return sprite.getPosition();
 }
 
 void Button::setSize(sf::Vector2f size){
@@ -63,6 +67,8 @@ void Button::setTextResize(std::string s = "Click"){
 }
 
 void Button::draw(sf::RenderWindow& w){
+    sf::Vector2f position = getPosition();
+    text.setPosition(position.x + sprite.getGlobalBounds().width/2 - text.getGlobalBounds().width/2, position.y + sprite.getGlobalBounds().height/2 - text.getGlobalBounds().height/2);
     w.draw(sprite);
     w.draw(text);
 }

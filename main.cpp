@@ -16,12 +16,14 @@ int main() {
     button.setPosition(0,0);
     button.setSize(window.getSize().x/20, window.getSize().x/40);
     button.setText("Penguin");
+    Button button2 = button;
     //GAME LOOP
     while(window.isOpen()){
         //Loop for handling events
         sf::Event event;
         while(window.pollEvent(event)){
             button.handleEvent(event);
+            button2.handleEvent(event);
             switch (event.type){
                 //Close event
                 case sf::Event::Closed:
@@ -40,6 +42,7 @@ int main() {
         //Clear the window
         window.clear();
         button.draw(window);
+        button2.draw(window);
         window.display();
     }
 }
