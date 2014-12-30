@@ -27,7 +27,8 @@ public:
     /* Return true if the button has been clicked */
     bool hasBeenClicked();
 
-    //TODO implement this
+    /* Return the time since the last time the button
+    has been clicked (returned in a float as seconds)*/
     float timeSinceLastClick();
 
     /* Set the text on the button */
@@ -40,6 +41,15 @@ public:
     //TODO this
     void enableClickEffect();
     void disableClickEffect();
+
+    /*Set the size of the characters of the button text*/
+    void setCharacterSize(uint u);
+
+    /*Set the color of the button's text*/
+    void setColor(sf::Color c);
+
+    /*Set the Font passed as a parameter as the one used by the button*/
+    void setFont(sf::Font f);
 
     /* Set the Texture that will be used as default button image */
     void setTexture(std::string name);
@@ -57,8 +67,11 @@ private:
 
     bool clicked;
     bool is_clicked;
+    bool clickEffect;
 
+    sf::Font font;
     sf::Text text;
+    sf::Clock clock;
     sf::Sprite sprite;
     sf::Texture texture;
     sf::Texture pressed_texture;

@@ -15,7 +15,7 @@ int main() {
     Button button;
     button.setPosition(0,0);
     button.setSize(window.getSize().x/20, window.getSize().x/40);
-
+    button.setText("Penguin");
     //GAME LOOP
     while(window.isOpen()){
         //Loop for handling events
