@@ -9,7 +9,7 @@ Button::Button(){
     if(!font.loadFromFile("defaultFont.otf")){ std::cerr << "Can't find the font file" << std::endl; }
     setFont(font);
     setCharacterSize(9);
-    setColor(sf::Color::Red);
+    setTextColor(sf::Color::Red);
 
     if(!texture.loadFromFile("defaultButton.png")) std::cerr << "Default texture not loaded" << std::endl;
     else sprite.setTexture(texture);

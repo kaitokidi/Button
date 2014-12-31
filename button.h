@@ -62,8 +62,11 @@ public:
     /* Returns the characterSize*/
     uint getCharacterSize();
 
-    /*Set the color of the button's text*/
-    void setColor(sf::Color c);
+    /* Set the color of the button's text*/
+    void setTextColor(sf::Color c);
+
+    /* Returns the color of the button's text*/
+    sf::Color getTextColor();
 
     /*Set the Font passed as a parameter as the one used by the button*/
     void setFont(sf::Font f);
