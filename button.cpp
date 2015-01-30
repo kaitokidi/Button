@@ -28,8 +28,10 @@ void Button::setFont(sf::Font f){ font = f; text.setFont(font); }
 
 void Button::setPosition(sf::Vector2f position){
     sprite.setPosition(position);
-    text.setPosition(position.x + sprite.getGlobalBounds().width/2 - (text.getGlobalBounds().width()/2), 
-        position.y + sprite.getGlobalBounds().height/2 - (text.getGlobalBounds().height()/2));
+    text.setPosition(position.x +
+                     sprite.getGlobalBounds().width/2 -
+                     text.getGlobalBounds().width/2,
+        position.y + sprite.getGlobalBounds().height/2 - (text.getGlobalBounds().height/2));
 }
 
 void Button::setPosition(float x, float y){
@@ -77,14 +79,6 @@ void Button::setText(std::string s = "Click"){
 
 std::string Button::getText(){ return text.getString();}
 
-//TODO fix it -_-
-void Button::setSize(sf::Vector2f size){
-    sprite.setScale(size.x/sprite.getGlobalBounds().width, size.y/sprite.getGlobalBounds().height);
-    //TODO set text size
-}
-
-void Button::setSize(float x, float y){ setSize(sf::Vector2f(x,y)); }
-
 //TODO should be a resize for text and a resize for button
 void Button::setTextResize(std::string s = "Click"){
     text.setString(s);
@@ -92,7 +86,7 @@ void Button::setTextResize(std::string s = "Click"){
         float actualTextSize, factor;
         actualTextSize = text.getGlobalBounds().width;
         //WTF THIS 10?¿?¿?¿? well... it works :$
-        factor = (actualTextSize)*10/sprite.getGlobalBounds().width;
+        factor = (actualTextSize)/10/sprite.getGlobalBounds().width;
         sprite.setScale(factor, factor);
     }
 }
