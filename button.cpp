@@ -8,7 +8,7 @@ Button::Button(){
 
     if(!font.loadFromFile("defaultFont.otf")){ std::cerr << "Can't find the font file" << std::endl; }
     setFont(font);
-    setCharacterSize(9);
+    setCharacterSize(30);
     setTextColor(sf::Color::Red);
 
     if(!texture.loadFromFile("defaultButton.png")) std::cerr << "Default texture not loaded" << std::endl;
@@ -30,8 +30,6 @@ void Button::setFont(sf::Font f){ font = f; text.setFont(font); }
 
 void Button::setPosition(sf::Vector2f position){
     sprite.setPosition(position);
-    //TODO set text on the center of sprite
-//    text.setPosition(position.x, position.y + sprite.getGlobalBounds().height/2);
 }
 void Button::setPosition(float x, float y){
     setPosition(sf::Vector2f(x, y));
@@ -41,12 +39,14 @@ sf::Vector2f Button::getPosition(){
     return sprite.getPosition();
 }
 
-void Button::setSize(sf::Vector2f size){
-    sprite.setScale(size.x/sprite.getGlobalBounds().width, size.y/sprite.getGlobalBounds().height);
-    //TODO set text size
-}
 sf::Vector2f Button::getSize(){
     return sf::Vector2f(sprite.getGlobalBounds().width,sprite.getGlobalBounds().height);
+}
+
+
+void Button::setSize(sf::Vector2f size){
+    sprite.setScale(size.x/sprite.getGlobalBounds().width, size.y/sprite.getGlobalBounds().height);
+    this->setText(text.getString());
 }
 
 void Button::setSize(float x, float y){ setSize(sf::Vector2f(x,y)); }
@@ -61,16 +61,31 @@ bool Button::hasBeenClicked(){
 
 float Button::timeSinceLastClick(){ return clock.getElapsedTime().asSeconds(); }
 
-void Button::setText(std::string s = "Click"){ text.setString(s); }
+void Button::setText(std::string s = "Click"){
+    text.setString(s);
+    if(s.size() != 0){
+        float actualCharSize, desiredCharSize;
+        float actualTextSize, desiredTextSize;
+        actualCharSize = text.getCharacterSize();
+        actualTextSize = text.getGlobalBounds().width+2;
+        desiredTextSize = sprite.getGlobalBounds().width;
+        desiredCharSize = actualCharSize*desiredTextSize/actualTextSize;
+        text.setCharacterSize(desiredCharSize);
+    }
+}
 
 std::string Button::getText(){ return text.getString();}
 
-//TODO fix it, is broken
+//TODO fix it -_-
 void Button::setTextResize(std::string s = "Click"){
     text.setString(s);
-    float charSize = text.getCharacterSize();
-    float length = charSize * (text.getString().getSize() +2);
-    this->setSize(sf::Vector2f(length,sprite.getGlobalBounds().height));
+    if(s.size() != 0){
+        float actualTextSize, factor;
+        actualTextSize = text.getGlobalBounds().width;
+        //WTF THIS 10?¿?¿?¿? well... it works :$
+        factor = (actualTextSize)*10/sprite.getGlobalBounds().width;
+        sprite.setScale(factor, factor);
+    }
 }
 
 void Button::draw(sf::RenderWindow& w){

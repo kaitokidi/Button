@@ -38,8 +38,8 @@ int main() {
         }
 
         if(button.hasBeenClicked()) button.setPosition(rand()%(window.getSize().x - window.getSize().x/20), rand()%(window.getSize().y - window.getSize().x/20));
-
-
+        button.setTextResize("Penguinpenguinpenguin");
+        std::cout << button.getSize().x << std::endl;
         //Clear the window
         window.clear();
         button.draw(window);
