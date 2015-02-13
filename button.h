@@ -9,43 +9,53 @@ class Button{
 
 public:
 
+    //CONSTRUCTOR
+    
     /* Initialize the private variables */
     Button();
+    
+    /* Initialize the button with the parameters as the text, texture, size and position */
+    Button(std::string text, std::string texturePath, float sizeX, float sizeY);
 
-    /* Set the size passed as parameter */
-    void setSize(float x, float y);
-    void setSize(sf::Vector2f size);
+    /* Initialize the button with the parameters as the text, texture, size and position */
+    Button(std::string text, std::string texturePath, std::string pressedTexturePath, float sizeX, float sizeY);
+    
+    
+    // SET PROPERTIES 
+    
+    /* Set the text on the button */
+    void setText(std::string s);
 
-    /* Return the size of the button*/
-    sf::Vector2f getSize();
+    /* Set the Texture that will be used as default button image */
+    void setTexture(std::string name);
 
-    /* The return indicates if the button is
-    clicked or not*/
-    bool isClicked();
+    /* Set the Texture that will be used as default button pressed image */
+    void setPressedTexture(std::string name);
 
     /* Set the position of the button */
     void setPosition(float x, float y);
     void setPosition(sf::Vector2f position);
 
-    /* Return the position of the button*/
-    sf::Vector2f getPosition();
+    /* Set the size of the button passed as parameter */
+    void setSize(float x, float y);
+    void setSize(sf::Vector2f size);
 
-    /* Return true if the button has been clicked */
-    bool hasBeenClicked();
+    /* Set the size of the characters of the button text*/
+    void setCharacterSize(uint u);
 
-    /* Return the time since the last time the button
-    has been clicked (returned in a float as seconds)*/
-    float timeSinceLastClick();
-
-    /* Set the text on the button */
-    void setText(std::string s);
-
-    /* Returns the string setted on the text*/
-    std::string getText();
-    
     /* Set the text on the button and scale the button 
     so the text fits on it */
-    void setTextResize(std::string s);
+    void setTextResizeButton(std::string s);
+
+    /* Set the text on the button and scale the text 
+    so the it fits on the button */
+    void setTextResizeText(std::string s);
+
+    /* Set the color of the button's text*/
+    void setTextColor(sf::Color c);
+
+    /*Set the Font passed as a parameter as the one used by the button*/
+    void setFont(sf::Font f);
 
     /* Enable the change of texture when the button is clicked */
     void enableClickEffect();
@@ -53,29 +63,42 @@ public:
     /* Disable the change of texture when the button is clicked */
     void disableClickEffect();
 
+
+
+    //  GET INFORMATION
+    
+    /* The return indicates if the button is
+    clicked or not*/
+    bool isClicked();
+
+    /* Return true if the button has been clicked and this function has 
+     not been checked yet */
+    bool hasBeenClicked();
+
+    /* Return the time passed since the last time the button
+    has been clicked (returned in a float as seconds)*/
+    float timeSinceLastClick();
+
     /* Returns wether ClickEffect is activated or not */
     bool clickEffectActivated();
 
-    /* Set the size of the characters of the button text*/
-    void setCharacterSize(uint u);
+    /* Returns the string setted on the text*/
+    std::string getText();
+
+    /* Return the position of the button*/
+    sf::Vector2f getPosition();
+
+    /* Return the size of the button*/
+    sf::Vector2f getSize();
 
     /* Returns the characterSize*/
     uint getCharacterSize();
 
-    /* Set the color of the button's text*/
-    void setTextColor(sf::Color c);
-
     /* Returns the color of the button's text*/
     sf::Color getTextColor();
 
-    /*Set the Font passed as a parameter as the one used by the button*/
-    void setFont(sf::Font f);
 
-    /* Set the Texture that will be used as default button image */
-    void setTexture(std::string name);
-    
-    /* Set the Texture that will be used as default button pressed image */
-    void setPressedTexture(std::string name);
+    // ACTION PERFORM 
 
     /* Draw the button on the window passed as parameter */
     void draw(sf::RenderWindow &w);
@@ -83,6 +106,7 @@ public:
     /* Update the private variables if needed acordingly to the event*/
     void handleEvent(sf::Event e);
 
+    
 private:
 
     bool clicked;

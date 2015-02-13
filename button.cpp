@@ -17,6 +17,41 @@ Button::Button(){
     setPosition(0,0);
 }
 
+Button::Button(std::string myText, std::string texturePath, float sizeX, float sizeY){
+    text.setString(myText);
+    clicked = false;
+    is_clicked = false;
+    clickEffect = true;
+
+    if(!font.loadFromFile("defaultFont.otf")){ std::cerr << "Can't find the font file" << std::endl; }
+    else setFont(font); setCharacterSize(30); setTextColor(sf::Color::White);
+
+    if(!texture.loadFromFile(texturePath)) std::cerr << "Failed on load texture from " << texturePath << std::endl;
+    else sprite.setTexture(texture);
+
+    disableClickEffect();
+
+    setPosition(0,0);
+}
+
+Button::Button(std::string myText, std::string texturePath, std::string pressedTexturePath, float sizeX, float sizeY){
+    text.setString(myText);
+    clicked = false;
+    is_clicked = false;
+    clickEffect = true;
+
+    if(!font.loadFromFile("defaultFont.otf")){ std::cerr << "Can't find the font file" << std::endl; }
+    else setFont(font); setCharacterSize(30); setTextColor(sf::Color::White);
+
+    if(!texture.loadFromFile(texturePath)) std::cerr << "Failed on load texture from " << texturePath << std::endl;
+    else sprite.setTexture(texture);
+
+    if(!pressed_texture.loadFromFile(pressedTexturePath))  std::cerr << "Failed on load texture from " << pressedTexturePath << std::endl;
+    else sprite.setTexture(pressed_texture);    
+
+    setPosition(0,0);
+}
+
 void Button::setTextColor(sf::Color c){text.setColor(c); }
 sf::Color Button::getTextColor(){ return text.getColor(); }
 
@@ -49,7 +84,7 @@ sf::Vector2f Button::getSize(){
 
 void Button::setSize(sf::Vector2f size){
     sprite.setScale(size.x/sprite.getGlobalBounds().width, size.y/sprite.getGlobalBounds().height);
-    this->setText(text.getString());
+    this->setTextResizeText(text.getString());
 }
 
 void Button::setSize(float x, float y){ setSize(sf::Vector2f(x,y)); }
@@ -79,15 +114,24 @@ void Button::setText(std::string s = "Click"){
 
 std::string Button::getText(){ return text.getString();}
 
-//TODO should be a resize for text and a resize for button
-void Button::setTextResize(std::string s = "Click"){
+
+void Button::setTextResizeButton(std::string s = "Click"){
     text.setString(s);
     if(s.size() != 0){
         float actualTextSize, factor;
         actualTextSize = text.getGlobalBounds().width;
-        //WTF THIS 10?¿?¿?¿? well... it works :$
-        factor = (actualTextSize)/10/sprite.getGlobalBounds().width;
-        sprite.setScale(factor, factor);
+        factor = (actualTextSize)/sprite.getGlobalBounds().width;
+        sprite.scale(factor, 1);      
+    }
+}
+
+void Button::setTextResizeText(std::string s = "Click"){
+    text.setString(s);
+    if(s.size() != 0){
+        float actualTextSize, factor;
+        actualTextSize = text.getGlobalBounds().width;
+        factor = sprite.getGlobalBounds().width/(actualTextSize);
+        text.scale(factor, factor);      
     }
 }
 
