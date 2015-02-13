@@ -48,6 +48,8 @@ Button::Button(std::string myText, std::string texturePath, std::string pressedT
 
     if(!pressed_texture.loadFromFile(pressedTexturePath))  std::cerr << "Failed on load texture from " << pressedTexturePath << std::endl;
     else sprite.setTexture(pressed_texture);    
+    
+    enableClickEffect();
 
     setPosition(0,0);
 }
@@ -145,12 +147,9 @@ void Button::draw(sf::RenderWindow& w){
 void Button::setTexture(std::string name){
     float sizeX = getSize().x;
     float sizeY = getSize().y;
-    
     if(!texture.loadFromFile(name)) std::cerr << "Default texture not loaded on setTexture" << std::endl;
     else sprite.setTexture(texture, true); 
-    
     setSize(sizeX, sizeY);
-    
 }
 
 void Button::setPressedTexture(std::string name){
