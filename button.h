@@ -11,7 +11,8 @@ public:
 
     /* Initialize the private variables */
     Button();
-
+    Button(std::string myText, std::string texturePath, float sizeX, float sizeY);
+    Button(std::string myText, std::string texturePath, std::string pressedTexturePath, float sizeX, float sizeY);
     /* Set the size passed as parameter */
     void setSize(float x, float y);
     void setSize(sf::Vector2f size);
