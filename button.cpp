@@ -6,22 +6,20 @@ Button::Button(){
     is_clicked = false;
     clickEffect = true;
 
-    if(!font.loadFromFile("defaultFont.otf")){ std::cerr << "Can't find the font file" << std::endl; }
+   /* if(!font.loadFromFile("defaultFont.otf")){ std::cerr << "Can't find the font file" << std::endl; }
     else setFont(font); setCharacterSize(30); setTextColor(sf::Color::White);
-
     if(!texture.loadFromFile("defaultButton.png")) std::cerr << "Default texture not loaded" << std::endl;
     else sprite.setTexture(texture);
-
     if(!pressed_texture.loadFromFile("defaultPressedButton.png")) std::cerr << "presedButton text. not loaded" << std::endl;
-
+*/
     setPosition(0,0);
 }
 
 void Button::setTextColor(sf::Color c){text.setColor(c); }
 sf::Color Button::getTextColor(){ return text.getColor(); }
 
-void Button::setCharacterSize(uint u){ text.setCharacterSize(u); }
-uint Button::getCharacterSize(){ return text.getCharacterSize(); }
+void Button::setCharacterSize(int u){ text.setCharacterSize(u); }
+int Button::getCharacterSize(){ return text.getCharacterSize(); }
 
 void Button::setFont(sf::Font f){ font = f; text.setFont(font); }
 
@@ -93,9 +91,13 @@ void Button::setTextResize(std::string s = "Click"){
 
 void Button::draw(sf::RenderWindow& w){
     sf::Vector2f position = getPosition();
-    text.setPosition(position.x + sprite.getGlobalBounds().width/2 - text.getGlobalBounds().width/2, position.y + sprite.getGlobalBounds().height/2 - text.getGlobalBounds().height/2);
+    text.setPosition(position.x + sprite.getGlobalBounds().width/2 - text.getGlobalBounds().width/2, position.y + sprite.getGlobalBounds().height/2 - text.getGlobalBounds().height);
     w.draw(sprite);
     w.draw(text);
+}
+
+void Button::setOrigin(sf::Vector2f origin){
+    sprite.setOrigin(origin);
 }
 
 void Button::setTexture(std::string name){
@@ -110,6 +112,11 @@ void Button::disableClickEffect(){ clickEffect = false; }
 bool Button::clickEffectActivated(){ return clickEffect; }
 
 void Button::handleEvent(sf::Event e){
+    
+    float delayx, delayy;
+    delayx = sprite.getOrigin().x*sprite.getScale().x;
+    delayy = sprite.getOrigin().y*sprite.getScale().y;
+    sprite.move(-delayx, -delayy);
     if(e.type == sf::Event::MouseButtonPressed){
         if (e.mouseButton.button == sf::Mouse::Left) {
             sf::Vector2f click(e.mouseButton.x, e.mouseButton.y);
@@ -130,4 +137,5 @@ void Button::handleEvent(sf::Event e){
             if(clickEffect && sprite.getTexture() != &texture) sprite.setTexture(texture);
         }
     }
+    sprite.move(delayx, delayy);
 }

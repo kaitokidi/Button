@@ -57,10 +57,10 @@ public:
     bool clickEffectActivated();
 
     /* Set the size of the characters of the button text*/
-    void setCharacterSize(uint u);
+    void setCharacterSize(int u);
 
     /* Returns the characterSize*/
-    uint getCharacterSize();
+    int getCharacterSize();
 
     /* Set the color of the button's text*/
     void setTextColor(sf::Color c);
@@ -82,6 +82,8 @@ public:
 
     /* Update the private variables if needed acordingly to the event*/
     void handleEvent(sf::Event e);
+    
+    void setOrigin(sf::Vector2f origin);
 
 private:
 
